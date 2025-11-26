@@ -11,28 +11,50 @@
 </head>
 <body>
     <main class="container">
-        <form>
+        <form id="loginform">
             <h1>Registrar-se</h1>
             <div class="input-box">
-                <input placeholder="Usuário" type="email">
+                <input placeholder="Usuário" id="nome" type="text" required>
                 <i class="bx bxs-user"></i>
             </div>
             <div class="input-box">
-                <input id="senha" placeholder="Digite a senha" type="password">
+                <input placeholder="exemplo@gmail.com" id="email" type="email" required>
+                <i class="bx bxs-user"></i>
+            </div>
+            <div class="input-box">
+                <input id="senha" placeholder="Digite a senha" type="password" required>
                 <i class="fa-solid fa-eye togglesenha" onclick="toggleSenha()"></i>
             </div>
             <div class="input-box">
-                <input id="senha2" placeholder="Digite a senha novamente" type="password">
+                <input id="senha2" placeholder="Digite a senha novamente" type="password" required>
                 <i class="fa-solid fa-eye togglesenha" onclick="toggleSenha2()"></i>
             </div>
 
-            <button type="submit" class="login">Prosseguir</button>
+            <button type="submit" class="login" onclick="fazerLogin()">Prosseguir</button>
 
             <div class="login-link">
                 <p>Já possui uma conta? <a href="index.html">Login</a></p>
             </div>
         </form>
     </main>
-<script src="./register/scriptRegister.js"></script>
+<script src="scriptRegister.js"></script>
+
+<script>
+document.getElementById("loginForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const email = document.getElementById("email").value;
+    const senha = document.getElementById("senha").value;
+
+    const res = await fetch("http://localhost:3000/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, senha })
+    });
+
+    const data = await res.json();
+    alert(JSON.stringify(data));
+});
+</script>
 </body>
 </html>
