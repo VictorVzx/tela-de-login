@@ -20,10 +20,9 @@ document.getElementById("loginform").addEventListener("submit", async function (
 
     // Login deu certo
     alert("Login bem-sucedido!"); 
-    console.log("Token:", data.token);
 
     // depois do login você pode redirecionar
-    // window.location.href = "home.html";
+    window.location.href = "index.html";
 });
 
 // Mostrar/ocultar senha
